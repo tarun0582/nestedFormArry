@@ -1,0 +1,43 @@
+
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="employees">
+    <div *ngFor="let employee of peoplesData().controls; let i=index">
+      <div
+        [formGroupName]="i"
+        style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
+      >
+        {{i+1}} First Name :
+        <input type="text" formControlName="firstName" />
+        Last Name:
+        <input type="text" formControlName="lastName" />
+
+        <button (click)="removeEmployee(i)">Remove</button>
+
+        <div formArrayName="state">
+          <div
+            *ngFor="let skill of peoplesState(i).controls; let stateIndex=index"
+          >
+            <div [formGroupName]="stateIndex">
+              {{stateIndex}} state :
+              <input type="text" formControlName="state" />
+              disst:
+              <input type="text" formControlName="disst" />
+
+              <button (click)=" removeState(i,stateIndex)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addState(i)">
+          Add state
+        </button>
+      </div>
+    </div>
+    <button type="button" (click)="addPeople()">Add people</button>
+  </div>
+  <button type="submit" (click)="onSubmit()">submit</button>
+</form>
+
+
